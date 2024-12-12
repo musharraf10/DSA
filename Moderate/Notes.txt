@@ -58,6 +58,12 @@ If the string is present, its reference is returned.
 
 -> heapPriority.poll() gives the higest number in priority queue
 
+git status                  # Check the status of your repository
+git add .                   # Stage all changes
+git commit -m "Daily update message"  # Commit changes
+git pull origin main        # Pull latest updates from remote
+git push origin main        # Push your changes to the remote
+
 --->END<---
 Due to more than 3 hours of inactivity, I have not received a response to my messages.
  Therefore, I am closing this question. Feel free to reopen the chat and tag me; I will be happy to explain.
