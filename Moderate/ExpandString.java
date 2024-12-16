@@ -1,6 +1,6 @@
 public class ExpandString {
     public static void main(String[] args) {
-        String inputStr = "a3b5c2a12";
+        String inputStr = "a3b5c2a1";
         StringBuilder result = new StringBuilder();
         int i = 0;
 
@@ -22,7 +22,6 @@ public class ExpandString {
                 result.append(character);
             }
         }
-
         // Print the final expanded string
         System.out.println(result.toString());
     }
