@@ -50,7 +50,7 @@ public class NQueens{
     }
 
     public static void main(String[] args) {
-        int n = 5;
+        int n = 4;
         char[][] board = new char[n][n];
         // Initialization
         for (int i = 0; i < n; i++) {
