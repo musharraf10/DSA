@@ -58,6 +58,21 @@ If the string is present, its reference is returned.
 
 -> heapPriority.poll() gives the higest number in priority queue
 
+In Java, the static keyword is used to indicate that a particular member
+(variable, method, block, or nested class) belongs to the class itself, 
+rather than to instances (objects) of the class. This means you can access static members without creating an object of the class.
+
+Key Use Cases of static in Java:
+Static Variables (Class Variables)
+Static Methods
+Static Blocks
+Static Nested Classes
+
+Key Rules:
+
+Static methods cannot access non-static (instance) variables or methods.
+Static methods can only call other static methods or use static variables directly.
+
 git status                  # Check the status of your repository
 git add .                   # Stage all changes
 git commit -m "Daily update message"  # Commit changes
