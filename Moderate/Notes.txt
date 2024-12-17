@@ -21,6 +21,402 @@ String Builder : - String Builder is not a String if we want to convert into Str
 -> delete() method
 ↳ The delete() method of StringBuilder class deletes the string from the specified beginIndex to endIndex.
 ↳ sb.delete(1,3);
+--------------------------------------------------------------------
+  Method	                     Description
+---------------------------------------------------------------------
+put(K, V)              Inserts or updates a key-value pair.
+putIfAbsent(K, V)	     Inserts only if the key is absent.
+get(K)	               Retrieves the value for the key.
+getOrDefault(K, V)	   Retrieves the value or a default if key is missing.
+containsKey(K)	       Checks if the key exists.
+containsValue(V)	     Checks if the value exists.
+remove(K)	             Removes the mapping for the key.
+replace(K, V)	         Replaces the value for a key.
+keySet()	             Returns all keys.
+values()	             Returns all values.
+entrySet()	           Returns all key-value pairs.
+forEach(BiConsumer<K, V>)->	Performs an action for each key-value pair.
+size()	               Returns the number of entries.
+isEmpty()	             Checks if the map is empty.
+clear()	               Removes all entries.
+------------------------------------------------------------------
+Java String split()
+Splits the string at the specified string (regex)
+
+Java String compareTo()
+Compares two strings in the dictionary order
+
+Java String compareToIgnoreCase()
+Compares two strings ignoring case differences
+
+Java String length()
+Returns the length of the string
+
+Java String replace()
+Replace all matching characters/text in the string
+
+Java String replaceAll()
+Replace all substrings matching the regex pattern
+
+Java String substring()
+Returns a substring from the given string
+
+Java String equals()
+Compares two strings
+
+Java String equalsIgnoreCase()
+Compares two strings ignoring case differences
+
+Java String contains()
+Checks whether the string contains a substring
+
+Java String indexOf()
+Returns the index of the character/substring
+
+Java String trim()
+Removes any leading and trailing whitespace
+
+Java String charAt()
+Returns the character at the given index
+
+Java String toLowerCase()
+Converts characters in the string to lower case
+
+Java String concat()
+Concatenates two strings and returns it
+
+Java String valueOf()
+Returns the string representation of a value
+
+Java String matches()
+checks whether the string matches the given regex
+
+Java String startsWith()
+Checks if the string begins with the given string
+
+Java String endsWith()
+Checks if the string ends with the given string
+
+Java String isEmpty()
+Checks whether a string is empty or not
+
+Java String intern()
+Returns a canonical representation of the string
+
+Java String getBytes()
+Encodes the string into a sequences of bytes
+
+Java String contentEquals()
+Checks whether the string is equal to charSequence
+
+Java String hashCode()
+Returns a hash code for the string
+
+Java String join()
+Joins the given strings using the delimiter
+
+Java String replaceFirst()
+Replace the first matching substring
+
+Java String subSequence()
+Returns a subsequence from the string
+
+Java String toCharArray()
+Converts the string to a char array
+
+Java String format()
+Returns a formatted string
+
+Java ArrayList add()
+inserts the element to the arraylist
+
+Java ArrayList addAll()
+adds all elements of a collection to arraylist
+
+Java ArrayList clear()
+removes all the elements from arraylist
+
+Java ArrayList clone()
+makes a copy of the array list
+
+Java ArrayList contains()
+checks if the element is present in the arraylist
+
+Java ArrayList get()
+returns the element present in the specified index
+
+Java ArrayList indexOf()
+returns the position of the specified element
+
+Java ArrayList removeAll()
+removes multiple elements from the arraylist
+
+Java ArrayList remove()
+removes the single element from the arraylist
+
+Java ArrayList size()
+returns the length of an arraylist
+
+Java ArrayList isEmpty()
+checks if the arraylist is empty
+
+Java ArrayList subList()
+returns a portion of the arraylist
+
+Java ArrayList set()
+replace the single element from an arraylist
+
+Java ArrayList sort()
+sorts the arraylist according to specified order
+
+Java ArrayList toArray()
+converts an arraylist to an array
+
+Java ArrayList toString()
+converts the arraylist into a String
+
+Java ArrayList ensureCapacity()
+set the size of an araylist
+
+Java ArrayList lastIndexOf()
+returns position of last occurrence of the element
+
+Java ArrayList retainAll()
+retains only the common elements
+
+Java ArrayList containsAll()
+checks if a collection is a subset of arraylist
+
+Java ArrayList trimToSize()
+trims the capacity of arraylist equal to the size
+
+Java ArrayList removeRange()
+removes a portion of the arraylist
+
+Java ArrayList replaceAll()
+replace all elements from the arraylist
+
+Java ArrayList removeIf()
+removes element that satisfy the condition
+
+Java ArrayList forEach()
+performs an action to all elements of arraylist
+
+Java ArrayList iterator()
+returns an iterate to loop through the ArrayList
+
+## Java HashMap Methods
+
+Java HashMap clear()
+remove all elements from HashMap
+
+Java HashMap clone()
+makes the copy of the hashmap
+
+Java HashMap isEmpty()
+checks if the HashMap is empty
+
+Java HashMap size()
+returns the number of items in HashMap
+
+Java HashMap put()
+inserts the specified item to the hashmap
+
+Java HashMap putAll()
+inserts all items from a map to HashMap
+
+Java HashMap putIfAbsent()
+inserts item if the key is not already present
+
+Java HashMap remove()
+removes the mapping for the specified key
+
+Java HashMap containsKey()
+checks if the specified key is present in HashMap
+
+Java HashMap containsValue()
+checks if HashMap contains the specified value
+
+Java HashMap replace()
+replaces the value for the specified key
+
+Java HashMap replaceAll()
+replaces all values with
+
+Java HashMap get()
+returns the value using the specified key
+
+Java HashMap getOrDefault()
+returns specified default value if key not found
+
+Java HashMap forEach()
+performs the action to all entries of HashMap
+
+Java HashMap entrySet()
+returns a set view of all entries
+
+Java HashMap keySet()
+returns a set view of all the keys of HashMap
+
+Java HashMap values()
+returns a view of all values present in HashMap
+
+Java HashMap merge()
+merges the specified mapping to the HashMaps
+
+Java HashMap compute()
+computes a new value for the specified key
+
+Java HashMap computeIfAbsent()
+computes value if mapping for key is not present
+
+Java HashMap computeIfPresent()
+computes a value for the mapping if key is present
+
+## Java Math Methods
+
+Java Math abs()
+returns the absolute value of a number
+
+Java Math acos()
+returns the arc cosine of the specified value
+
+Java Math addExact()
+adds the specified numbers and returns it
+
+Java Math asin()
+returns the arc sine of the specified argument
+
+Java Math atan()
+returns the inverse tangent function of a value
+
+Java Math cos()
+returns the cosine of the specified angle
+
+Java Math sin()
+returns the sine of the specified angle in radians
+
+Java Math tan()
+returns the tangent value of the specified angle
+
+Java Math sinh()
+returns the hyperbolic sine of the specified value
+
+Java Math cosh()
+returns hyperbolic cosine of the specified value
+
+Java Math tanh()
+returns hyperbolic tangent of the specified value
+
+Java Math sqrt()
+returns the square root of the specified number
+
+Java Math cbrt()
+returns the cube root of the specified number
+
+Java Math pow()
+returns first argument raised to power of second
+
+Java Math subtractExact()
+subtracts the specified numbers and returns it
+
+Java Math multiplyExact()
+multiplies the specified numbers and returns it
+
+Java Math incrementExact()
+adds 1 to the specified number and returns it
+
+Java Math decrementExact()
+subtracts 1 from specified number and returns it
+
+Java Math negateExact()
+negates the specified variable and returns it
+
+Java Math toIntExact()
+returns the int value from specified long argument
+
+Java Math min()
+returns the smaller value among the arguments
+
+Java Math max()
+returns the maximum value among the arguments
+
+Java Math ceil()
+rounds the specified value upward
+
+Java Math floor()
+rounds the specified value downward and returns it
+
+Java Math round()
+rounds the specified argument and returns it
+
+Java Math toRadians()
+converts angle from degree to radians
+
+Java Math toDegrees()
+converts angle from radians to degrees
+
+Java Math atan2()
+returns θ converting coordinates (x, y) to (r, θ)
+
+Java Math copySign()
+copies the sign of second argument to the first
+
+Java Math exp()
+returns e raised to power of given value
+
+Java Math expm1()
+returns e raised to power of given value minus 1
+
+Java Math getExponent()
+returns the unbiased exponent of specified number
+
+Java Math hypot()
+computes the hypotenuse of a right-angle triangle
+
+Java Math IEEEremainder()
+returns the remainder as per the IEEE 754 standard
+
+Java Math log()
+returns the natural logarithm of specified value
+
+Java Math log10()
+returns the base 10 logarithm of specified value
+
+Java Math log1p()
+returns natural logarithm of (specified value + 1)
+
+Java Math nextAfter()
+returns number adjacent to specified number
+
+Java Math nextUp()
+returns number greater than and adjacent to value
+
+Java Math nextDown()
+returns number less than and adjacent to the value
+
+Java Math rint()
+returns closest mathematical integer of the vaue
+
+Java Math.random()
+returns a random value between 0.0 and 1.0
+
+Java Object Methods
+
+Java Object getClass()
+returns the class name of the object
+
+Java Object hashCode()
+returns the hashcode value of the object
+
+Java Object toString()
+converts an object into the string
+
+Java Object equals()
+checks if two objects are equal
+
+Java Object clone()
+creates a copy of the object
 ------------------------------------------------------------------
 -> Java String intern()
 ↳ The Java String class intern() method returns the interned string. 
