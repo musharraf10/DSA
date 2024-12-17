@@ -78,6 +78,7 @@ git add .                   # Stage all changes
 git commit -m "Daily update message"  # Commit changes
 git pull origin main        # Pull latest updates from remote
 git push origin main        # Push your changes to the remote
+git init	                  # Initialize a new Git repository
 
 --->END<---
 Due to more than 3 hours of inactivity, I have not received a response to my messages.
