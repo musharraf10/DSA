@@ -476,6 +476,9 @@ git pull origin main        # Pull latest updates from remote
 git push origin main        # Push your changes to the remote
 git init	                  # Initialize a new Git repository
 
+https://www.geeksforgeeks.org/puzzle-9-find-the-fastest-3-horses/
+
+
 --->END<---
 Due to more than 3 hours of inactivity, I have not received a response to my messages.
  Therefore, I am closing this question. Feel free to reopen the chat and tag me; I will be happy to explain.
