@@ -5,7 +5,7 @@ public class LinearSearchStrings {
         Scanner scanner = new Scanner(System.in);
 
         // Create a string array
-        String[] words = {"apple", "banana", "cherry", "date", "elderberry"};
+        String[] words = { "apple", "banana", "cherry", "date", "elderberry" };
 
         // Get the word to search for
         System.out.print("Enter the word to search: ");
@@ -20,7 +20,7 @@ public class LinearSearchStrings {
                 break;
             }
         }
-
+        scanner.close();
         if (!found) {
             System.out.println("Word not found in the array.");
         }
