@@ -1,9 +1,8 @@
-import java.util.Arrays;
 public class MergeWithoutExtraSpace {
     public static void merge(int[] a, int[] b) {
         int n = a.length;
         int m = b.length;
-        int gap = (n + m) / 2 + (n + m) % 2; 
+        int gap = (n + m) / 2 + (n + m) % 2;
         while (gap > 0) {
             int i = 0;
             int j = gap;
@@ -33,7 +32,7 @@ public class MergeWithoutExtraSpace {
 
             // Reduce the gap
             if (gap == 1) {
-                gap = 0; 
+                gap = 0;
             } else {
                 gap = (gap / 2) + (gap % 2);
             }
@@ -41,8 +40,8 @@ public class MergeWithoutExtraSpace {
     }
 
     public static void main(String[] args) {
-        int[] a = {2, 4, 7, 10};
-        int[] b = {2, 3};
+        int[] a = { 2, 4, 7, 10 };
+        int[] b = { 2, 3 };
 
         merge(a, b);
 

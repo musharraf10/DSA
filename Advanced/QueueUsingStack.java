@@ -1,6 +1,7 @@
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
+
 public class QueueUsingStack {
     static Stack<Integer> s1 = new Stack<>();
     static Stack<Integer> s2 = new Stack<>();
@@ -28,12 +29,13 @@ public class QueueUsingStack {
     }
 
     public static void main(String[] args) {
-       Queue q = new LinkedList<>();
-        q.add(10);
-        q.add(20);
-        q.add(30);
-        while(!q.isEmpty()){
-            System.out.print(q.peek()+" ");
+        @SuppressWarnings("rawtypes")
+        Queue q = new LinkedList<>();
+        add(10);
+        add(20);
+        add(30);
+        while (!q.isEmpty()) {
+            System.out.print(q.peek() + " ");
             q.remove();
         }
     }

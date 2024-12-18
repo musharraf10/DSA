@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class TripletSum {
     public static boolean findTriplet(int[] arr, int target) {
         // Sort the array
@@ -28,7 +30,7 @@ public class TripletSum {
     }
 
     public static void main(String[] args) {
-        int[] arr = {12, 3, 4, 1, 6, 9};
+        int[] arr = { 12, 3, 4, 1, 6, 9 };
         int target = 24;
 
         findTriplet(arr, target);

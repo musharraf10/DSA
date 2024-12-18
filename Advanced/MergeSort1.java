@@ -1,5 +1,5 @@
-public class MergeSort {
-    
+public class MergeSort1 {
+
     // Function to divide the array and merge sorted halves
     public static void mergeSort(int[] arr, int left, int right) {
         if (left < right) {
@@ -36,7 +36,7 @@ public class MergeSort {
         // Merge the temporary arrays
 
         int i = 0, j = 0; // Initial indices of leftArray and rightArray
-        int k = left;     // Initial index of merged subarray
+        int k = left; // Initial index of merged subarray
 
         while (i < n1 && j < n2) {
             if (leftArray[i] <= rightArray[j]) {
@@ -55,13 +55,14 @@ public class MergeSort {
             i++;
             k++;
         }
-//copy right 
+        // copy right
         while (j < n2) {
             arr[k] = rightArray[j];
             j++;
             k++;
         }
     }
+
     // Utility function to print an array
     public static void printArray(int[] arr) {
         for (int num : arr) {
@@ -72,7 +73,7 @@ public class MergeSort {
 
     // Driver method
     public static void main(String[] args) {
-        int[] arr = {12, 11, 13, 5, 6, 7};
+        int[] arr = { 12, 11, 13, 5, 6, 7 };
         System.out.println("Original array:");
         printArray(arr);
 

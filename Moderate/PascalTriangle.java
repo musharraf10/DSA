@@ -18,6 +18,7 @@ public class PascalTriangle {
                 number = number * (i - j) / (j + 1);
             }
             System.out.println();
+            scanner.close();
         }
     }
 }

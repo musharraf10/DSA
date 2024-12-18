@@ -3,7 +3,9 @@ class BSTGpt {
         int data;
         Node left, right;
 
-        Node(int d) { data = d; }
+        Node(int d) {
+            data = d;
+        }
     }
 
     Node root;
@@ -13,13 +15,12 @@ class BSTGpt {
     }
 
     private Node insertRec(Node root, int data) {
-        if (root == null){
+        if (root == null) {
             return new Node(data);
         }
         if (data < root.data) {
             root.left = insertRec(root.left, data);
-        }
-        else {
+        } else {
             root.right = insertRec(root.right, data);
         }
         return root;
@@ -38,7 +39,7 @@ class BSTGpt {
     }
 
     public static void main(String[] args) {
-        BST tree = new BST();
+        BSTGpt tree = new BSTGpt();
         tree.insert(50);
         tree.insert(30);
         tree.insert(70);
