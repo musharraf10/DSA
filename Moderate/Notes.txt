@@ -476,6 +476,14 @@ git pull origin main        # Pull latest updates from remote
 git push origin main        # Push your changes to the remote
 git init	                  # Initialize a new Git repository
 
+
+cd /path/to/your/project
+git init
+git remote add origin https://github.com/musharraf10/ZoomClone.git
+git add .
+git commit -m "Initial commit"
+git push -u origin main
+
 https://www.geeksforgeeks.org/puzzle-9-find-the-fastest-3-horses/
 
 
