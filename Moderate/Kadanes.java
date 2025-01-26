@@ -13,4 +13,9 @@ class Kadanes {
 
         return ms;
     }
+    public static void main(String[] args) {
+        Kadanes k = new Kadanes();
+        int[] nums = {-2,-3,-4,-1,-2,-5};
+        System.out.println(k.maxSubArray(nums));
+    }
 }
