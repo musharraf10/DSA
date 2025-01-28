@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flexbox Column/Row Toggle</title>
+  <style>
+    #container {
+      display: flex;
+      gap: 10px;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+    .box {
+      width: 50px;
+      height: 50px;
+      background-color: lightblue;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    button {
+      margin: 20px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <button id="toggleLayout">Switch to Column</button>
+  <div id="container">
+    <div class="box">1</div>
+    <div class="box">2</div>
+    <div class="box">3</div>
+    <div class="box">4</div>
+  </div>
+
+  <script>
+    const container = document.getElementById("container");
+    const button = document.getElementById("toggleLayout");
+
+    let isRow = true;
+
+    button.addEventListener("click", () => {
+      isRow = !isRow;
+      container.style.flexDirection = isRow ? "row" : "column";
+      button.textContent = isRow ? "Switch to Column" : "Switch to Row";
+    });
+  </script>
+</body>
+</html>

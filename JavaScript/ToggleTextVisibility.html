@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toggle Text</title>
+</head>
+<body>
+  <script>
+    const paragraph = document.createElement("p");
+    paragraph.textContent = "This is some text.";
+    document.body.appendChild(paragraph);
+
+    const button = document.createElement("button");
+    button.textContent = "Hide/Show Text";
+    document.body.appendChild(button);
+
+    button.addEventListener("click", () => {
+      paragraph.style.display = paragraph.style.display === "none" ? "block" : "none";
+    });
+  </script>
+</body>
+</html>

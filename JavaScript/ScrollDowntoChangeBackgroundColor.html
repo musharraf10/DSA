@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll to Change Background</title>
+  <style>
+    body {
+      height: 200vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      transition: background-color 0.3s ease;
+    }
+    p {
+      margin: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <p>Scroll the page to see the background color change!</p>
+
+  <script>
+    window.addEventListener("scroll", () => {
+      const scrollY = window.scrollY;
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercentage = scrollY / height;
+      document.body.style.backgroundColor = `rgba(${Math.floor(scrollPercentage * 255)}, 100, 150, 1)`;
+    });
+  </script>
+</body>
+</html>

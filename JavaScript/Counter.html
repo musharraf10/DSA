@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Counter</title>
+</head>
+<body>
+  <script>
+    const counterDisplay = document.createElement("p");
+    counterDisplay.textContent = "0";
+    document.body.appendChild(counterDisplay);
+
+    const incrementButton = document.createElement("button");
+    incrementButton.textContent = "Increment";
+    document.body.appendChild(incrementButton);
+
+    const decrementButton = document.createElement("button");
+    decrementButton.textContent = "Decrement";
+    document.body.appendChild(decrementButton);
+
+    let count = 0;
+
+    incrementButton.addEventListener("click", () => {
+      count++;
+      counterDisplay.textContent = count;
+    });
+
+    decrementButton.addEventListener("click", () => {
+      count--;
+      counterDisplay.textContent = count;
+    });
+  </script>
+</body>
+</html>

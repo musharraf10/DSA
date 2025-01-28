@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add List Items</title>
+</head>
+<body>
+  <script>
+    const input = document.createElement("input");
+    input.placeholder = "Enter item";
+    document.body.appendChild(input);
+
+    const button = document.createElement("button");
+    button.textContent = "Add Item";
+    document.body.appendChild(button);
+
+    const list = document.createElement("ul");
+    document.body.appendChild(list);
+
+    button.addEventListener("click", () => {
+      if (input.value.trim() !== "") {
+        const listItem = document.createElement("li");
+        listItem.textContent = input.value;
+        list.appendChild(listItem);
+        input.value = "";
+      }
+    });
+  </script>
+</body>
+</html>

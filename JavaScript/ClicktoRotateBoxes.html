@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Click to Rotate</title>
+  <style>
+    #container {
+      display: flex;
+      gap: 10px;
+      padding: 20px;
+    }
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: lightseagreen;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 16px;
+      transition: transform 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div class="box">1</div>
+    <div class="box">2</div>
+    <div class="box">3</div>
+  </div>
+
+  <script>
+    document.querySelectorAll(".box").forEach((box) => {
+      let rotation = 0;
+      box.addEventListener("click", () => {
+        rotation += 90;
+        box.style.transform = `rotate(${rotation}deg)`;
+      });
+    });
+  </script>
+</body>
+</html>
