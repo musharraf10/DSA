@@ -21,8 +21,6 @@ public class Sample {
         System.out.print("Enter a number: ");
         int number = scanner.nextInt();
 
-        number = 5;
-
         if (isPrime(number)) {
             System.out.println(number + " is a prime number.");
         } else {
@@ -33,3 +31,4 @@ public class Sample {
 
     }
 }
+//Completed
