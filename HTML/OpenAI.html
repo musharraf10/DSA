@@ -181,6 +181,7 @@
       }
     </style>
     <script src="https://js.puter.com/v2/"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   </head>
   <body>
     <div class="chat-container">
@@ -205,86 +206,97 @@
     </div>
 
     <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const chatForm = document.getElementById("chat-form");
-    const messageInput = document.getElementById("message-input");
-    const chatWindow = document.getElementById("chat-window");
-    const signInButton = document.getElementById('sign-in');
+      document.addEventListener("DOMContentLoaded", () => {
+        const chatForm = document.getElementById("chat-form");
+        const messageInput = document.getElementById("message-input");
+        const chatWindow = document.getElementById("chat-window");
+        const signInButton = document.getElementById("sign-in");
 
-    // 1. Initialize an array to hold the entire conversation history.
-    // The 'system' role sets the initial behavior for the AI.
-    let messages = [
-      {
-        role: 'system',
-        content: 'You are a helpful and friendly AI assistant.'
-      }
-    ];
+        // 1. Initialize an array to hold the entire conversation history.
+        // The 'system' role sets the initial behavior for the AI.
+        let messages = [
+          {
+            role: "system",
+            content: "Hey buddy ! How can I help you today?",
+          },
+        ];
 
-    // --- Authentication Logic ---
-    // Because signIn() opens a popup, it must be called from a user action.
-    signInButton.addEventListener('click', async () => {
-        // signIn() will resolve when the user has signed in.
-        await puter.auth.signIn();
-        // You could update the UI here, e.g., hide the sign-in button
-        signInButton.style.display = 'none'; 
-    });
-
-    // --- Chat Logic ---
-    chatForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const messageText = messageInput.value.trim();
-
-      if (messageText) {
-        // Display the user's message in the UI
-        addMessage(messageText, "sent");
-
-        // 2. Add the user's message to the history array
-        messages.push({
-          role: 'user',
-          content: messageText
+        // --- Authentication Logic ---
+        // Because signIn() opens a popup, it must be called from a user action.
+        signInButton.addEventListener("click", async () => {
+          // signIn() will resolve when the user has signed in.
+          await puter.auth.signIn();
+          // You could update the UI here, e.g., hide the sign-in button
+          signInButton.style.display = "none";
         });
 
-        // Clear the input field
-        messageInput.value = "";
+        // --- Chat Logic ---
+        chatForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const messageText = messageInput.value.trim();
 
-        // 3. Send the entire history array to the AI
-        puter.ai
-          .chat(messages) 
-          .then((response) => {
-            // Display the AI's response in the UI
-            addMessage(response, "received");
+          if (messageText) {
+            // Display the user's message in the UI
+            addMessage(messageText, "sent");
 
-            // console.log("AI response:", response.message.content);
-
-            // 4. Add the AI's response to the history for context in the next turn
+            // 2. Add the user's message to the history array
             messages.push({
-              role: 'assistant', // The AI's role is 'assistant'
-              content: response.message.content
+              role: "user",
+              content: messageText,
             });
-          })
-          .catch((error) => {
-            console.error("AI response error:", error);
-            addMessage("Sorry, I encountered an error. Please try again.", "received");
-          });
-      }
-    });
 
-    function addMessage(text, type) {
-      const messageElement = document.createElement("div");
-      messageElement.className = `message ${type}`;
+            // Clear the input field
+            messageInput.value = "";
 
-      const bubbleElement = document.createElement("div");
-      bubbleElement.className = "message-bubble";
-      bubbleElement.textContent = text;
+            // 3. Send the entire history array to the AI
+            puter.ai
+              .chat(messages)
+              .then((response) => {
+                // Display the AI's response in the UI
+                addMessage(response.message.content, "received");
 
-      messageElement.appendChild(bubbleElement);
-      chatWindow.appendChild(messageElement);
+                // console.log("AI response:", response.message.content);
 
-      chatWindow.scrollTop = chatWindow.scrollHeight;
-    }
-  });
-</script>
-</body>
-</html>
+                // 4. Add the AI's response to the history for context in the next turn
+                messages.push({
+                  role: "assistant", // The AI's role is 'assistant'
+                  content: response.message.content,
+                });
+              })
+              .catch((error) => {
+                console.error("AI response error:", error);
+                addMessage(
+                  "Sorry, I encountered an error. Please try again.",
+                  "received"
+                );
+              });
+          }
+        });
+
+        function addMessage(text, type) {
+          const messageElement = document.createElement("div");
+          messageElement.className = `message ${type}`;
+
+          const bubbleElement = document.createElement("div");
+          bubbleElement.className = "message-bubble";
+
+          // Check if the message is from the AI to parse it as HTML
+          if (type === "received") {
+            // Use marked.parse() to convert Markdown to HTML
+            // Use innerHTML to render the formatted text
+            bubbleElement.innerHTML = marked.parse(text);
+          } else {
+            // For user-sent messages, use textContent for security
+            bubbleElement.textContent = text;
+          }
+
+          messageElement.appendChild(bubbleElement);
+          chatWindow.appendChild(messageElement);
+
+          // Auto-scroll to the latest message
+          chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
+      });
+    </script>
   </body>
 </html>

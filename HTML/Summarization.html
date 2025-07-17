@@ -8,6 +8,7 @@
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
       body {
         background-color: #f8f9fa;
@@ -85,7 +86,7 @@
               document.getElementById("summarizeButton").disabled = false;
               hideSpinner();
               // print the response
-              summaryOutput.innerHTML = response;
+              summaryOutput.innerHTML = marked.parse(response.message.content);
             })
             .catch(function (error) {
               // enable the button
