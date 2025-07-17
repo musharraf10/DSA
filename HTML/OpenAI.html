@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real-Time Chat</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --body-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --chat-bg: rgba(255, 255, 255, 0.1);
+        --text-color: #f0f0f0;
+        --input-bg: rgba(0, 0, 0, 0.2);
+        --sent-bubble-bg: #007bff;
+        --received-bubble-bg: #2c2c2e;
+        --font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        font-family: var(--font-family);
+        background: var(--body-bg);
+        color: var(--text-color);
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .chat-container {
+        width: 90%;
+        max-width: 800px;
+        height: 90vh;
+        max-height: 700px;
+        display: flex;
+        flex-direction: column;
+        background: var(--chat-bg);
+        border-radius: 20px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .chat-header {
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.15);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px 20px 0 0;
+        text-align: center;
+      }
+
+      .chat-header h2 {
+        margin: 0;
+        font-weight: 500;
+        font-size: 1.2rem;
+      }
+
+      .chat-window {
+        flex-grow: 1;
+        padding: 20px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      /* Custom Scrollbar */
+      .chat-window::-webkit-scrollbar {
+        width: 8px;
+      }
+      .chat-window::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .chat-window::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+      }
+      .chat-window::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.4);
+      }
+
+      .message {
+        display: flex;
+        flex-direction: column;
+        max-width: 70%;
+        animation: fadeIn 0.3s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .message-bubble {
+        padding: 12px 18px;
+        border-radius: 20px;
+        line-height: 1.5;
+        word-wrap: break-word;
+      }
+
+      .message.sent {
+        align-self: flex-end;
+        align-items: flex-end;
+      }
+
+      .message.sent .message-bubble {
+        background: var(--sent-bubble-bg);
+        color: white;
+        border-bottom-right-radius: 5px;
+      }
+
+      .message.received {
+        align-self: flex-start;
+        align-items: flex-start;
+      }
+
+      .message.received .message-bubble {
+        background: var(--received-bubble-bg);
+        color: var(--text-color);
+        border-bottom-left-radius: 5px;
+      }
+
+      .chat-input-form {
+        display: flex;
+        padding: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      #message-input {
+        flex-grow: 1;
+        border: none;
+        background: var(--input-bg);
+        border-radius: 20px;
+        padding: 12px 20px;
+        font-family: var(--font-family);
+        color: var(--text-color);
+        font-size: 1rem;
+        outline: none;
+        transition: background 0.3s;
+      }
+
+      #message-input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      #message-input:focus {
+        background: rgba(0, 0, 0, 0.4);
+      }
+
+      #send-button {
+        background: var(--sent-bubble-bg);
+        border: none;
+        color: white;
+        padding: 12px 18px;
+        border-radius: 20px;
+        margin-left: 10px;
+        cursor: pointer;
+        font-family: var(--font-family);
+        font-weight: 500;
+        font-size: 1rem;
+        transition: background 0.3s, transform 0.1s;
+      }
+
+      #send-button:hover {
+        background: #0056b3;
+      }
+
+      #send-button:active {
+        transform: scale(0.95);
+      }
+    </style>
+    <script src="https://js.puter.com/v2/"></script>
+  </head>
+  <body>
+    <div class="chat-container">
+      <div class="chat-header">
+        <h2>Chat with AI 🤖</h2>
+        <button id="sign-in" class="chat-header">Sign in</button>
+      </div>
+      <div class="chat-window" id="chat-window">
+        <div class="message received">
+          <div class="message-bubble">Hello! How can I help you today?</div>
+        </div>
+      </div>
+      <form class="chat-input-form" id="chat-form">
+        <input
+          type="text"
+          id="message-input"
+          placeholder="Type your message..."
+          autocomplete="off"
+        />
+        <button type="submit" id="send-button">Send</button>
+      </form>
+    </div>
+
+    <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const chatForm = document.getElementById("chat-form");
+    const messageInput = document.getElementById("message-input");
+    const chatWindow = document.getElementById("chat-window");
+    const signInButton = document.getElementById('sign-in');
+
+    // 1. Initialize an array to hold the entire conversation history.
+    // The 'system' role sets the initial behavior for the AI.
+    let messages = [
+      {
+        role: 'system',
+        content: 'You are a helpful and friendly AI assistant.'
+      }
+    ];
+
+    // --- Authentication Logic ---
+    // Because signIn() opens a popup, it must be called from a user action.
+    signInButton.addEventListener('click', async () => {
+        // signIn() will resolve when the user has signed in.
+        await puter.auth.signIn();
+        // You could update the UI here, e.g., hide the sign-in button
+        signInButton.style.display = 'none'; 
+    });
+
+    // --- Chat Logic ---
+    chatForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const messageText = messageInput.value.trim();
+
+      if (messageText) {
+        // Display the user's message in the UI
+        addMessage(messageText, "sent");
+
+        // 2. Add the user's message to the history array
+        messages.push({
+          role: 'user',
+          content: messageText
+        });
+
+        // Clear the input field
+        messageInput.value = "";
+
+        // 3. Send the entire history array to the AI
+        puter.ai
+          .chat(messages) 
+          .then((response) => {
+            // Display the AI's response in the UI
+            addMessage(response, "received");
+
+            // console.log("AI response:", response.message.content);
+
+            // 4. Add the AI's response to the history for context in the next turn
+            messages.push({
+              role: 'assistant', // The AI's role is 'assistant'
+              content: response.message.content
+            });
+          })
+          .catch((error) => {
+            console.error("AI response error:", error);
+            addMessage("Sorry, I encountered an error. Please try again.", "received");
+          });
+      }
+    });
+
+    function addMessage(text, type) {
+      const messageElement = document.createElement("div");
+      messageElement.className = `message ${type}`;
+
+      const bubbleElement = document.createElement("div");
+      bubbleElement.className = "message-bubble";
+      bubbleElement.textContent = text;
+
+      messageElement.appendChild(bubbleElement);
+      chatWindow.appendChild(messageElement);
+
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+  });
+</script>
+</body>
+</html>
+  </body>
+</html>

@@ -10,7 +10,7 @@ public class DiagonalSum {
                 }
             }
         } // O(n^2)
-        return sum;
+        return sum;    
     }
 
     public static void Diagonal1(int mat[][]) {
