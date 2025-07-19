@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BhashaSetu - Business Model Explorer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: The SPA is designed as a strategic dashboard to explore the business model, not just a static report. It starts with a high-level overview (The Ecosystem), dives into an interactive financial model (Pricing & Revenue Simulator), addresses the founder's key strategic challenges with proposed solutions, and concludes with a tangible product roadmap. This task-oriented flow allows the user to (1) Understand the model, (2) Play with its financial levers, (3) See solutions to their main concerns, and (4) Envision the future product. Navigation is handled by a sticky header for quick access to these key sections. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Core business model (students pay tutors, platform takes a cut). Goal: Compare cost distribution. Viz/Method: Interactive Bar Chart (Chart.js). Interaction: Sliders adjust hourly rate and commission, and the chart dynamically updates the breakdown. Justification: Provides immediate visual feedback on financial levers.
+        - Report Info: Multiple revenue streams (commission, user/tutor memberships). Goal: Inform on revenue composition. Viz/Method: Donut Chart (Chart.js). Interaction: The chart updates when toggling hypothetical membership adoption. Justification: Clearly illustrates the relative importance of each revenue stream.
+        - Report Info: Ecosystem of Students, Tutors, Platform. Goal: Organize the key players. Viz/Method: HTML/CSS/Tailwind Grid layout with icons. Interaction: Hover effects on each column. Justification: A clear, non-graphical way to represent the three-sided marketplace.
+        - Report Info: User's strategic questions (tutor availability, pricing, etc.). Goal: Inform and propose solutions. Viz/Method: Tabbed content sections made with HTML/JS. Interaction: Clicking a challenge reveals the strategy. Justification: Organizes complex strategic information cleanly, preventing overload.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f5f5f4; /* stone-100 */
+        color: #292524; /* stone-800 */
+      }
+      .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 300px;
+        max-height: 350px;
+      }
+      @media (min-width: 768px) {
+        .chart-container {
+          height: 350px;
+          max-height: 400px;
+        }
+      }
+      .nav-link {
+        transition: color 0.3s;
+      }
+      .nav-link:hover {
+        color: #0d9488; /* teal-600 */
+      }
+      .control-panel-item {
+        border: 1px solid #e7e5e4; /* stone-200 */
+        background-color: white;
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+      }
+      .tab.active {
+        border-bottom-color: #0d9488; /* teal-600 */
+        color: #0d9488;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+      <nav
+        class="container mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <h1 class="text-2xl font-bold text-stone-800">
+          Bhasha<span class="text-teal-600">Setu</span>
+        </h1>
+        <div class="hidden md:flex space-x-8">
+          <a href="#ecosystem" class="nav-link text-stone-600 font-medium"
+            >Ecosystem</a
+          >
+          <a href="#model" class="nav-link text-stone-600 font-medium"
+            >Business Model</a
+          >
+          <a href="#challenges" class="nav-link text-stone-600 font-medium"
+            >Strategic Solutions</a
+          >
+          <a href="#roadmap" class="nav-link text-stone-600 font-medium"
+            >Roadmap</a
+          >
+        </div>
+        <a
+          href="#model"
+          class="bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition"
+          >Explore Model</a
+        >
+      </nav>
+    </header>
+
+    <main class="container mx-auto p-6 md:p-8">
+      <section id="hero" class="text-center py-16">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-stone-800 mb-4">
+          Interactive Business Plan: Language Learning Platform
+        </h2>
+        <p class="max-w-3xl mx-auto text-lg text-stone-600">
+          This interactive document analyzes your business idea for a language
+          learning marketplace. Use the tools below to simulate financial
+          outcomes, explore the value proposition, and find solutions to key
+          strategic challenges.
+        </p>
+      </section>
+
+      <section id="ecosystem" class="py-16">
+        <div class="text-center mb-12">
+          <h3 class="text-3xl font-bold text-stone-800">
+            The BhashaSetu Ecosystem
+          </h3>
+          <p class="mt-2 text-stone-600 max-w-2xl mx-auto">
+            Our platform creates a symbiotic relationship between Students,
+            Tutors, and the Platform itself, delivering unique value to each.
+          </p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8 text-center">
+          <div
+            class="bg-white p-8 rounded-xl shadow-md border border-stone-200"
+          >
+            <div class="text-4xl mb-4">🎓</div>
+            <h4 class="text-2xl font-bold text-stone-800 mb-2">Students</h4>
+            <p class="text-stone-600">
+              Gain confidence by learning Indian languages affordably and
+              flexibly from verified tutors. Pay-per-hour model ensures you only
+              pay for what you use.
+            </p>
+          </div>
+          <div
+            class="bg-white p-8 rounded-xl shadow-lg border-2 border-teal-500 scale-105"
+          >
+            <div class="text-4xl mb-4">🌐</div>
+            <h4 class="text-2xl font-bold text-stone-800 mb-2">The Platform</h4>
+            <p class="text-stone-600">
+              We provide the technology, marketplace, and trust. Our revenue
+              comes from a fair commission and premium membership features that
+              enhance the experience for everyone.
+            </p>
+          </div>
+          <div
+            class="bg-white p-8 rounded-xl shadow-md border border-stone-200"
+          >
+            <div class="text-4xl mb-4">🧑‍🏫</div>
+            <h4 class="text-2xl font-bold text-stone-800 mb-2">Tutors</h4>
+            <p class="text-stone-600">
+              Monetize your language skills with a flexible, part-time schedule.
+              Reach a wide audience of learners and benefit from our tools
+              designed for effective teaching.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="model"
+        class="py-16 bg-white rounded-2xl p-8 shadow-lg border border-stone-200"
+      >
+        <div class="text-center mb-12">
+          <h3 class="text-3xl font-bold text-stone-800">
+            Interactive Business Model
+          </h3>
+          <p class="mt-2 text-stone-600 max-w-2xl mx-auto">
+            Adjust the sliders and toggles to see how different pricing
+            strategies and membership models affect revenue for tutors and the
+            platform. The charts will update in real-time.
+          </p>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
+          <div class="flex flex-col space-y-8">
+            <div class="control-panel-item">
+              <label
+                for="hourlyRate"
+                class="block text-lg font-semibold text-stone-700 mb-2"
+                >Student's Hourly Rate (₹)</label
+              >
+              <input
+                type="range"
+                id="hourlyRate"
+                min="400"
+                max="2000"
+                value="1200"
+                step="50"
+                class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer"
+              />
+              <div class="text-center text-2xl font-bold text-teal-600 mt-2">
+                ₹<span id="hourlyRateValue">1200</span> / hour
+              </div>
+            </div>
+            <div class="control-panel-item">
+              <label
+                for="commission"
+                class="block text-lg font-semibold text-stone-700 mb-2"
+                >Platform Commission (%)</label
+              >
+              <input
+                type="range"
+                id="commission"
+                min="10"
+                max="35"
+                value="20"
+                step="1"
+                class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer"
+              />
+              <div class="text-center text-2xl font-bold text-teal-600 mt-2">
+                <span id="commissionValue">20</span>%
+              </div>
+            </div>
+            <div class="control-panel-item">
+              <h4 class="text-lg font-semibold text-stone-700 mb-3">
+                Hypothetical Membership Adoption
+              </h4>
+              <div class="flex justify-around">
+                <button
+                  id="membershipToggle"
+                  data-active="false"
+                  class="w-full text-center py-2 px-4 rounded-lg border-2 border-stone-300 bg-stone-50 text-stone-600 font-medium transition"
+                >
+                  Toggle Premium Memberships
+                </button>
+              </div>
+              <p class="text-sm text-stone-500 mt-3 text-center">
+                Click to simulate revenue from premium user and tutor
+                subscriptions. This assumes a portion of users opt-in.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex flex-col space-y-8">
+            <div class="control-panel-item">
+              <h4 class="text-lg font-semibold text-stone-700 mb-4 text-center">
+                Hourly Rate Breakdown
+              </h4>
+              <div class="chart-container">
+                <canvas id="rateBreakdownChart"></canvas>
+              </div>
+            </div>
+            <div class="control-panel-item">
+              <h4 class="text-lg font-semibold text-stone-700 mb-4 text-center">
+                Projected Revenue Sources
+              </h4>
+              <div class="chart-container">
+                <canvas id="revenueSourcesChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="challenges" class="py-16">
+        <div class="text-center mb-12">
+          <h3 class="text-3xl font-bold text-stone-800">
+            Addressing Your Key Challenges
+          </h3>
+          <p class="mt-2 text-stone-600 max-w-2xl mx-auto">
+            Here are proposed strategies for the critical questions you raised.
+            Click each tab to explore the solution.
+          </p>
+        </div>
+
+        <div>
+          <div class="border-b border-stone-200">
+            <nav class="flex space-x-4 sm:space-x-8 -mb-px" aria-label="Tabs">
+              <button
+                class="tab active whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
+                data-target="panel-1"
+              >
+                Pricing & Tutor Payouts
+              </button>
+              <button
+                class="tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm text-stone-500 hover:text-stone-700"
+                data-target="panel-2"
+              >
+                24/7 Availability
+              </button>
+              <button
+                class="tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm text-stone-500 hover:text-stone-700"
+                data-target="panel-3"
+              >
+                Student-Tutor Lock-in
+              </button>
+              <button
+                class="tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm text-stone-500 hover:text-stone-700"
+                data-target="panel-4"
+              >
+                Practice & Engagement
+              </button>
+            </nav>
+          </div>
+
+          <div class="mt-8">
+            <div id="panel-1" class="tab-panel">
+              <h4 class="text-xl font-semibold text-stone-800 mb-3">
+                Strategy: Tiered & Dynamic Pricing
+              </h4>
+              <p class="text-stone-600">
+                To balance the Indian market's price sensitivity with fair tutor
+                compensation, we can implement a multi-faceted approach.
+                Initially, offer a competitive base rate attractive to the
+                Indian market. For international users (from the UK, USA), the
+                platform can automatically present prices in their local
+                currency at a higher, market-appropriate rate. Tutors can set
+                their own base rate within a pre-defined range, and the platform
+                can add a premium for "peak hours" or highly-rated tutors,
+                ensuring tutors are rewarded for quality and availability during
+                high demand.
+              </p>
+            </div>
+            <div id="panel-2" class="tab-panel hidden">
+              <h4 class="text-xl font-semibold text-stone-800 mb-3">
+                Strategy: Hybrid Learning Model
+              </h4>
+              <p class="text-stone-600">
+                To solve the 24/7 demand vs. part-time tutor availability issue,
+                combine synchronous and asynchronous learning. When live tutors
+                are unavailable, users can access pre-recorded video lessons,
+                AI-powered conversational practice bots, and community forums.
+                This provides continuous value and engagement for the user. We
+                can also incentivize tutors to be active during off-peak hours
+                with slightly higher payouts, and clearly display tutor
+                schedules to manage user expectations.
+              </p>
+            </div>
+            <div id="panel-3" class="tab-panel hidden">
+              <h4 class="text-xl font-semibold text-stone-800 mb-3">
+                Strategy: Flexible Learning Paths
+              </h4>
+              <p class="text-stone-600">
+                A student should NOT be locked into a single tutor. This creates
+                dependency and risk. Instead, promote a flexible model. A
+                student can have a "primary tutor" they prefer, but should
+                always have the option to book sessions with other tutors based
+                on availability, specialty (e.g., conversational practice vs.
+                grammar), or rating. This gives the student control and ensures
+                they can always learn. The platform can use reviews and learning
+                history to recommend new tutors that fit the student's style.
+              </p>
+            </div>
+            <div id="panel-4" class="tab-panel hidden">
+              <h4 class="text-xl font-semibold text-stone-800 mb-3">
+                Strategy: Integrated Practice Tools
+              </h4>
+              <p class="text-stone-600">
+                Practice sessions can be integrated directly into the platform
+                to happen both during and after live sessions. We can implement
+                features like: <br />• <strong>Flashcard Decks:</strong> For
+                vocabulary building, shared between tutor and student. <br />•
+                <strong>Role-playing Scenarios:</strong> AI-powered bots that
+                simulate real-world conversations (e.g., ordering food, asking
+                for directions). <br />•
+                <strong>Pronunciation Feedback:</strong> A tool that records a
+                user's voice and provides instant feedback on pronunciation
+                accuracy. <br />• <strong>Community Challenges:</strong> Weekly
+                prompts to encourage users to practice speaking with each other
+                in low-stakes group rooms.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="roadmap" class="py-16">
+        <div class="text-center mb-12">
+          <h3 class="text-3xl font-bold text-stone-800">
+            Potential Feature Roadmap
+          </h3>
+          <p class="mt-2 text-stone-600 max-w-2xl mx-auto">
+            A phased approach to building the platform, starting with core
+            features and expanding over time.
+          </p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div
+            class="bg-white p-6 rounded-lg shadow-sm border border-stone-200"
+          >
+            <div class="flex items-center mb-4">
+              <div
+                class="bg-teal-100 text-teal-700 font-bold rounded-full w-8 h-8 flex items-center justify-center mr-4"
+              >
+                1
+              </div>
+              <h4 class="text-xl font-semibold text-stone-800">Phase 1: MVP</h4>
+            </div>
+            <ul class="list-disc list-inside text-stone-600 space-y-2">
+              <li>User & Tutor Registration</li>
+              <li>Language/Tutor Search & Profiles</li>
+              <li>Pay-per-hour Booking System</li>
+              <li>Basic Video Chat Room</li>
+              <li>Rating & Review System</li>
+            </ul>
+          </div>
+          <div
+            class="bg-white p-6 rounded-lg shadow-sm border border-stone-200"
+          >
+            <div class="flex items-center mb-4">
+              <div
+                class="bg-teal-100 text-teal-700 font-bold rounded-full w-8 h-8 flex items-center justify-center mr-4"
+              >
+                2
+              </div>
+              <h4 class="text-xl font-semibold text-stone-800">
+                Phase 2: Engagement
+              </h4>
+            </div>
+            <ul class="list-disc list-inside text-stone-600 space-y-2">
+              <li>AI Conversation Bots</li>
+              <li>Flashcard & Practice Tools</li>
+              <li>Student & Tutor Memberships</li>
+              <li>Community Forums</li>
+              <li>Group Classrooms</li>
+            </ul>
+          </div>
+          <div
+            class="bg-white p-6 rounded-lg shadow-sm border border-stone-200"
+          >
+            <div class="flex items-center mb-4">
+              <div
+                class="bg-teal-100 text-teal-700 font-bold rounded-full w-8 h-8 flex items-center justify-center mr-4"
+              >
+                3
+              </div>
+              <h4 class="text-xl font-semibold text-stone-800">
+                Phase 3: Scale & Expansion
+              </h4>
+            </div>
+            <ul class="list-disc list-inside text-stone-600 space-y-2">
+              <li>Mobile Applications (iOS/Android)</li>
+              <li>Corporate Language Training Packages</li>
+              <li>Advanced Tutor Analytics</li>
+              <li>Gamification & Leaderboards</li>
+              <li>Expansion to non-Indian languages</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-stone-800 text-white mt-16">
+      <div class="container mx-auto px-6 py-8 text-center text-stone-400">
+        <p>BhashaSetu Interactive Business Explorer</p>
+        <p class="text-sm mt-2">
+          This is a conceptual tool created to analyze a business model. All
+          data is illustrative.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const hourlyRateSlider = document.getElementById("hourlyRate");
+        const commissionSlider = document.getElementById("commission");
+        const membershipToggle = document.getElementById("membershipToggle");
+
+        const hourlyRateValue = document.getElementById("hourlyRateValue");
+        const commissionValue = document.getElementById("commissionValue");
+
+        const rateBreakdownCtx = document
+          .getElementById("rateBreakdownChart")
+          .getContext("2d");
+        const revenueSourcesCtx = document
+          .getElementById("revenueSourcesChart")
+          .getContext("2d");
+
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.color = "#57534e"; // stone-500
+
+        const rateBreakdownChart = new Chart(rateBreakdownCtx, {
+          type: "bar",
+          data: {
+            labels: ["Rate Breakdown"],
+            datasets: [
+              {
+                label: "Tutor Payout",
+                data: [0],
+                backgroundColor: "#2dd4bf", // teal-400
+                borderRadius: 4,
+              },
+              {
+                label: "Platform Commission",
+                data: [0],
+                backgroundColor: "#5eead4", // teal-300
+                borderRadius: 4,
+              },
+            ],
+          },
+          options: {
+            indexAxis: "y",
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: {
+                stacked: true,
+                title: { display: true, text: "Amount (₹)" },
+              },
+              y: { stacked: true, grid: { display: false } },
+            },
+            plugins: {
+              tooltip: {
+                callbacks: {
+                  label: function (context) {
+                    return `${context.dataset.label}: ₹${context.raw.toFixed(
+                      2
+                    )}`;
+                  },
+                },
+              },
+            },
+          },
+        });
+
+        const revenueSourcesChart = new Chart(revenueSourcesCtx, {
+          type: "doughnut",
+          data: {
+            labels: [
+              "Session Commissions",
+              "User Memberships",
+              "Tutor Memberships",
+            ],
+            datasets: [
+              {
+                data: [100, 0, 0],
+                backgroundColor: ["#0d9488", "#14b8a6", "#5eead4"], // teal-600, 500, 300
+                borderColor: "#ffffff",
+                borderWidth: 4,
+                hoverOffset: 8,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: "bottom" },
+              tooltip: {
+                callbacks: {
+                  label: function (context) {
+                    let label = context.label || "";
+                    if (label) {
+                      label += ": ";
+                    }
+                    if (context.parsed !== null) {
+                      label += context.parsed.toFixed(2) + "%";
+                    }
+                    return label;
+                  },
+                },
+              },
+            },
+          },
+        });
+
+        function updateVisuals() {
+          const rate = parseFloat(hourlyRateSlider.value);
+          const commissionPercent = parseFloat(commissionSlider.value);
+          const useMemberships = membershipToggle.dataset.active === "true";
+
+          hourlyRateValue.textContent = rate.toFixed(0);
+          commissionValue.textContent = commissionPercent.toFixed(0);
+
+          const commissionAmount = rate * (commissionPercent / 100);
+          const tutorPayout = rate - commissionAmount;
+
+          rateBreakdownChart.data.datasets[0].data[0] = tutorPayout;
+          rateBreakdownChart.data.datasets[1].data[0] = commissionAmount;
+          rateBreakdownChart.options.scales.x.max = rate;
+          rateBreakdownChart.update();
+
+          let commissionRevenue = 100;
+          let userMembershipRevenue = 0;
+          let tutorMembershipRevenue = 0;
+
+          if (useMemberships) {
+            commissionRevenue = 70;
+            userMembershipRevenue = 20;
+            tutorMembershipRevenue = 10;
+          }
+
+          const totalRevenue =
+            commissionRevenue + userMembershipRevenue + tutorMembershipRevenue;
+
+          revenueSourcesChart.data.datasets[0].data[0] =
+            (commissionRevenue / totalRevenue) * 100;
+          revenueSourcesChart.data.datasets[0].data[1] =
+            (userMembershipRevenue / totalRevenue) * 100;
+          revenueSourcesChart.data.datasets[0].data[2] =
+            (tutorMembershipRevenue / totalRevenue) * 100;
+          revenueSourcesChart.update();
+        }
+
+        membershipToggle.addEventListener("click", () => {
+          const isActive = membershipToggle.dataset.active === "true";
+          membershipToggle.dataset.active = !isActive;
+          if (!isActive) {
+            membershipToggle.classList.add(
+              "bg-teal-600",
+              "text-white",
+              "border-teal-600"
+            );
+            membershipToggle.classList.remove(
+              "bg-stone-50",
+              "text-stone-600",
+              "border-stone-300"
+            );
+            membershipToggle.textContent = "Premium Memberships Active";
+          } else {
+            membershipToggle.classList.remove(
+              "bg-teal-600",
+              "text-white",
+              "border-teal-600"
+            );
+            membershipToggle.classList.add(
+              "bg-stone-50",
+              "text-stone-600",
+              "border-stone-300"
+            );
+            membershipToggle.textContent = "Toggle Premium Memberships";
+          }
+          updateVisuals();
+        });
+
+        hourlyRateSlider.addEventListener("input", updateVisuals);
+        commissionSlider.addEventListener("input", updateVisuals);
+
+        const tabs = document.querySelectorAll(".tab");
+        const panels = document.querySelectorAll(".tab-panel");
+
+        tabs.forEach((tab) => {
+          tab.addEventListener("click", () => {
+            tabs.forEach((t) => {
+              t.classList.remove("active");
+              t.classList.add("text-stone-500", "hover:text-stone-700");
+            });
+            tab.classList.add("active");
+            tab.classList.remove("text-stone-500", "hover:text-stone-700");
+
+            const target = tab.getAttribute("data-target");
+
+            panels.forEach((panel) => {
+              if (panel.id === target) {
+                panel.classList.remove("hidden");
+              } else {
+                panel.classList.add("hidden");
+              }
+            });
+          });
+        });
+
+        updateVisuals();
+      });
+    </script>
+  </body>
+</html>
